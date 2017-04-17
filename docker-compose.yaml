@@ -1,0 +1,20 @@
+version: '3'
+services:
+    browser:
+        build: ./browser
+        volumes:
+          - ./browser:/project
+        expose:
+          - "9000"
+        restart: unless-stopped
+        command: ./phantomjs ./getSource.js 9000
+    micrometa:
+        build: ./micrometa
+        volumes:
+          - ./micrometa:/var/www/micrometa
+        ports:
+          - "9060:80"
+        links:
+          - browser
+        restart: unless-stopped
+        command: apachectl -DFOREGROUND
