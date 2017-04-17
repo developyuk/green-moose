@@ -1,6 +1,8 @@
 # GREEN MOOSE
 `Green Mooose` adalah sebuah layanan news/content aggregation (pengumpul berita / konten). 
 
+> Better documentation at https://goo.gl/iY3Qrk
+
 Another look a like service:
 - line today / line feed
 - feedly
