@@ -14,8 +14,6 @@ Another look a like service:
 3. Change directory to `/path/to/folder/green-moose`
 4. Run `./docker-compose-build.sh`, wait until `Successfully built ..` message displayed
 5. [Run project docker](#run-project-docker)
-6. Run `./docker-compose-login.sh`, you will get container terminal
-7. On container terminal, run `composer install` then run `exit`
 
 ## Run project docker
 1. Open Terminal

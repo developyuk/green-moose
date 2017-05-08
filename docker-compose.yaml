@@ -1,20 +1,22 @@
-version: '3'
+version: '2'
 services:
-    browser:
-        build: ./browser
+    backend:
+        build: ./backend
         volumes:
-          - ./browser:/project
-        expose:
-          - "9000"
-        restart: unless-stopped
-        command: ./phantomjs ./getSource.js 9000
-    micrometa:
-        build: ./micrometa
-        volumes:
-          - ./micrometa:/var/www/micrometa
+          - ./backend:/project/src:rw
+        working_dir: /project
         ports:
-          - "9060:80"
-        links:
-          - browser
+          - "9060:9000"
         restart: unless-stopped
-        command: apachectl -DFOREGROUND
+        command: node ./src/index.js
+    frontend:
+        image: busybox
+        volumes:
+          - ./frontend:/project
+        working_dir: /project
+        ports:
+          - "9065:80"
+        links:
+          - backend
+        restart: unless-stopped
+        command: tail -f /dev/null
