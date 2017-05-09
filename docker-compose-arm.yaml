@@ -9,16 +9,27 @@ services:
         working_dir: /project
         ports:
           - "9060:9000"
+        expose:
+          - "9000"
         restart: unless-stopped
         command: node ./src/index.js
+    frontenddev:
+        build:
+          context: ./frontend
+          dockerfile: Dockerfile-arm
+        volumes:
+          - ./frontend:/project/srcDir:rw
+        working_dir: /project
+        restart: unless-stopped
+        command: tail -f /dev/null
     frontend:
         image: armhf/busybox
         volumes:
-          - ./frontend:/project
+          - ./frontend/dist:/project
         working_dir: /project
         ports:
           - "9065:80"
         links:
           - backend
         restart: unless-stopped
-        command: tail -f /dev/null
+        command: /bin/busybox httpd -f -v -p 0.0.0.0:80 -h /project

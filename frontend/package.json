@@ -1,0 +1,25 @@
+{
+  "name": "green-moose",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watchPug": "pug --path ./srcDir/src/ --out /srcDir/dist/ --watch --pretty ./srcDir/src/*.pug",
+    "watchSass": "node-sass --watch --recursive --output ./srcDir/dist/css --output-style nested ./srcDir/src/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/developyuk/green-moose.git"
+  },
+  "author": "developyuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/developyuk/green-moose/issues"
+  },
+  "homepage": "https://github.com/developyuk/green-moose#readme",
+  "devDependencies": {
+    "node-sass": "^4.5.2",
+    "pug-cli": "^1.0.0-alpha6"
+  }
+}
