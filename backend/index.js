@@ -21,39 +21,56 @@ server.route({
     let data = {};
 
     db.all(`SELECT id,title,author,leadImage,content,excerpt FROM content`, (err, rows) => {
-      data = { status: !!rows.length, data: rows }
+      if (err) { throw err; }
+
+      data = { status: !err, data: rows }
       return rep(data)
     })
   }
 });
+
 // POST / : add url to db
 server.route({
   method: 'POST',
   path: '/',
   handler(req, rep) {
-    const url = req.payload.url ? encodeURIComponent(req.payload.url) : false
-    let data = { status: false, message: '', data: { id: null } };
+    const url = !! req.payload['url'] ? req.payload.url.trim() : false
+
+    let data = { status: false, message: '', data: { } };
+    if(! url){
+      data.message = 'url empty'
+      return rep(data)
+    };
 
     db.run("INSERT INTO source (url) VALUES (?)", url, function(err) {
-      const urlId = this.lastID;
 
-      if (!!urlId) {
+      if (! err) {
         // fetch from db with last insert id
+        const urlId = this.lastID;
         mercury.parse(url).then(response => {
           const dataDb = [ response.title, response.author, response.lead_image_url, response.content, response.excerpt, urlId ];
 
-          db.run('UPDATE source SET domain=? WHERE id=?', [ response.domain, urlId ], err => {
+          if (!!response.domain){
+            db.run('UPDATE source SET domain=? WHERE id=?', [ response.domain, urlId ], err => {
+              if (err) { throw err; }
 
-            db.run(`INSERT INTO
-              content (title,author,leadImage,content,excerpt,sourceId)
-              VALUES  (    ?,     ?,        ?,      ?,      ?,       ?)`, dataDb, function(err) {
+              db.run(`INSERT INTO
+                content (title,author,leadImage,content,excerpt,sourceId)
+                VALUES  (    ?,     ?,        ?,      ?,      ?,       ?)`, dataDb, function(err) {
 
-              data = { status: true, data: { id: this.lastID } }
+                  if (err) { throw err; }
+                  data = { status: true, data: { id: this.lastID } }
 
+                  return rep(data);
+                });
+
+              })
+          } else {
+            db.run('DELETE FROM source WHERE id=?',urlId,err=>{
+              data.message = 'Unauthorized access';
               return rep(data);
-            });
-
-          })
+            })
+          }
         }).catch(err => {
           data.message = err;
           return rep(data);
@@ -62,15 +79,22 @@ server.route({
         if (err.code == 'SQLITE_CONSTRAINT') {
 
           db.get(`SELECT c.id FROM content c
-              JOIN source s ON s.id = c.sourceId
-              WHERE s.url=?`, url, (err, row) => {
+            JOIN source s ON s.id = c.sourceId
+            WHERE s.url=?`, url, (err, row) => {
 
-            data = { status: true, data: { id: row.id } }
-            return rep(data);
+            if(!!row){
+              data = { status: !!row, data: { id: row['id'] } }
+              return rep(data);
+            } else{
+                db.run('DELETE FROM source WHERE url=?',url,err=>{
+                  data.message = 'Content not parsed yet, please refresh';
+                  return rep(data);
+                })
+            }
+
           })
         } else {
-          data.message = err;
-          return rep(data);
+          throw err;
         }
       }
     })
@@ -91,11 +115,9 @@ server.route({
       FROM content c JOIN source s ON s.id = c.sourceId
       WHERE c.id=?`, contentId, (err, row) => {
 
-      if (!!row) {
-        data = { status: true, data: row }
-      } else {
-        data = { status: false, message: err, data: {} }
-      }
+      if (err) { throw err; }
+
+      data = { status: !err, data: !!row ? row:{} }
       return rep(data)
     });
   }
