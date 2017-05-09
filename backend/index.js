@@ -11,12 +11,12 @@ server.connection({
 });
 
 // GET / : get all url
-// GET /{url} : get url
+// GET /{urlId} : get url
 server.route({
     method:['GET'],
     path: '/',
     handler(req, rep) {
-        const url = req.query.url ? encodeURIComponent(req.query.url) : False;
+        const url = req.query.url ? req.query.url : False;
 
         // check url exist on db
         // if exist, fetch from db

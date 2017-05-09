@@ -1,0 +1,24 @@
+version: '2'
+services:
+    backend:
+        build:
+          context: ./backend
+          dockerfile: Dockerfile-arm
+        volumes:
+          - ./backend:/project/src:rw
+        working_dir: /project
+        ports:
+          - "9060:9000"
+        restart: unless-stopped
+        command: node ./src/index.js
+    frontend:
+        image: armhf/busybox
+        volumes:
+          - ./frontend:/project
+        working_dir: /project
+        ports:
+          - "9065:80"
+        links:
+          - backend
+        restart: unless-stopped
+        command: tail -f /dev/null
