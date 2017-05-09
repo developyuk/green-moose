@@ -1,5 +1,1 @@
-browser/chromedriver*
-browser/geckodriver*
-browser/phantomjs*
-
-*.tar.bz2
+*.db
