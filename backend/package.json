@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/developyuk/green-moose#readme",
   "devDependencies": {
+    "good": "^7.1.0",
+    "good-console": "^6.4.0",
+    "good-squeeze": "^5.0.2",
     "hapi": "^16.1.1",
     "mercury-parser": "^1.0.0",
     "sqlite3": "^3.1.8"
