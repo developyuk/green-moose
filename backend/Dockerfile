@@ -10,6 +10,7 @@ RUN set -ex \
   && apt-get install -y --no-install-recommends --no-install-suggests \
     nodejs \
     build-essential \
+    sqlite3 \
   && rm -rf /var/lib/apt/lists/* \
 
   && apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y \
@@ -20,3 +21,9 @@ COPY package.json /project/package.json
 WORKDIR /project
 RUN set -ex \
   && npm install
+
+COPY content.sql /tmp/content.sql
+WORKDIR /project
+RUN set -ex \
+  && sqlite3 content.db < /tmp/content.sql \  
+  && rm -rf /tmp/*
