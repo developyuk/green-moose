@@ -21,7 +21,7 @@ Another look a like service:
 
 	1. Sign up at [mercury web parser](https://mercury.postlight.com/web-parser/)
 	2. Get `MERCURY WEB PARSER API KEY`
-	3. Replace `API_KEY` at [`./backend/index.js` on line 4](../develop/backend/route-root.js#L1) with your own `MERCURY WEB PARSER API KEY`
+	3. Replace `API_KEY` at [`backend/route-root.js` on line 1](../develop/backend/route-root.js#L1) with your own `MERCURY WEB PARSER API KEY`
 
 2. Open Terminal
 3. Change directory to `/path/to/folder/green-moose`
@@ -32,6 +32,10 @@ Another look a like service:
 ## Using backend service
 Open this address on browser. Replace `<docker.ip.address>` with your docker machine IP Address
 
+**Add content url to db**
+
+	curl -X POST -H "content-type:application/json" http://<docker.ip.address>:9060/3 -d '{"url":"http://tekno.kompas.com/read/2017/04/17/10400087/pengguna.snapchat.di.india.ramai-ramai.hapus.aplikasi.apa.sebabnya."}'
+
 **Get all content**
 
 	curl -H "content-type:application/json" http://<docker.ip.address>:9060
@@ -40,9 +44,7 @@ Open this address on browser. Replace `<docker.ip.address>` with your docker mac
 
 	curl -H "content-type:application/json" http://<docker.ip.address>:9060/1
 
-**Add content url to db**
 
-	curl -X POST -H "content-type:application/json" http://<docker.ip.address>:9060/3 -d '{"url":"http://tekno.kompas.com/read/2017/04/17/10400087/pengguna.snapchat.di.india.ramai-ramai.hapus.aplikasi.apa.sebabnya."}'
 
 ## Stop project docker
 1. Open Terminal
