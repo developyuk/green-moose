@@ -21,7 +21,7 @@ Another look a like service:
 
 	1. Sign up at [mercury web parser](https://mercury.postlight.com/web-parser/)
 	2. Get `MERCURY WEB PARSER API KEY`
-	3. Replace `API_KEY` at [`./backend/index.js` on line 4](../develop/backend/index.js#L4) with your own `MERCURY WEB PARSER API KEY`
+	3. Replace `API_KEY` at [`./backend/index.js` on line 4](../develop/backend/route-root.js#L1) with your own `MERCURY WEB PARSER API KEY`
 
 2. Open Terminal
 3. Change directory to `/path/to/folder/green-moose`
