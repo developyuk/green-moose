@@ -7,12 +7,14 @@ services:
         working_dir: /project
         ports:
           - "9060:9000"
+        expose:
+          - "9000"
         restart: unless-stopped
         command: node ./src/index.js
     frontend:
-        image: busybox
+        build: ./frontend
         volumes:
-          - ./frontend:/project
+          - ./frontend:/project/srcDir:rw
         working_dir: /project
         ports:
           - "9065:80"

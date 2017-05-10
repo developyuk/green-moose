@@ -1,5 +1,5 @@
 --
--- File generated with SQLiteStudio v3.1.1 on Tue May 9 12:55:33 2017
+-- File generated with SQLiteStudio v3.1.1 on Wed May 10 10:49:35 2017
 --
 -- Text encoding used: System
 --
@@ -14,7 +14,12 @@ CREATE TABLE content (
     leadImage VARCHAR (200),
     content   TEXT          NOT NULL,
     excerpt   STRING,
-    sourceId  INTEGER       REFERENCES source (id) 
+    sourceId  INTEGER       REFERENCES source (id),
+    UNIQUE (
+        title,
+        leadImage,
+        excerpt
+    )
 );
 
 
