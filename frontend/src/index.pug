@@ -2,9 +2,15 @@ doctype
 html
   head
     title Green Moose
-  script(src='https://unpkg.com/vue')
+    script(src='https://unpkg.com/vue')
+    script(src='js/main.js')
+    link(rel="stylesheet" type="text/css" href='css/main.css')
 body
   header
-  section#input
-  section#list
+  section#app.app
+    section.app__input
+      content-input(inline-template)
+        input(type='search')
+    section.app__list
+      content-list(inline-template)
   footer

@@ -5,8 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watchPug": "pug --path ./srcDir/src/ --out /srcDir/dist/ --watch --pretty ./srcDir/src/*.pug",
-    "watchSass": "node-sass --watch --recursive --output ./srcDir/dist/css --output-style nested ./srcDir/src/css"
+    "watch:pug": "pug --path srcDir/src/ --out srcDir/dist/ --watch --pretty srcDir/src/*.pug",
+    "watch:sass": "node-sass --watch --recursive --output srcDir/dist/css --output-style nested srcDir/src/css",
+    "watch:babel": "babel srcDir/src/js --watch --out-dir srcDir/dist/js",
+    "watch": "npm-run-all --parallel watch:*",
+    "build:pug": "pug --path srcDir/src/ --out srcDir/dist/ --pretty srcDir/src/*.pug",
+    "build:sass": "node-sass --recursive --output srcDir/dist/css --output-style nested srcDir/src/css",
+    "build:babel": "babel srcDir/src/js --out-dir srcDir/dist/js",
+    "build": "npm-run-all --parallel build:*",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -19,7 +26,9 @@
   },
   "homepage": "https://github.com/developyuk/green-moose#readme",
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "node-sass": "^4.5.2",
+    "npm-run-all": "^4.0.2",
     "pug-cli": "^1.0.0-alpha6"
   }
 }
