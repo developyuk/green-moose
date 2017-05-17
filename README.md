@@ -34,7 +34,7 @@ Open this address on browser. Replace `<docker.ip.address>` with your docker mac
 
 **Add content url to db**
 
-	curl -X POST -H "content-type:application/json" http://<docker.ip.address>:9060/3 -d '{"url":"http://tekno.kompas.com/read/2017/04/17/10400087/pengguna.snapchat.di.india.ramai-ramai.hapus.aplikasi.apa.sebabnya."}'
+	curl -X POST -H "content-type:application/json" http://<docker.ip.address>:9060 -d '{"url":"http://tekno.kompas.com/read/2017/04/17/10400087/pengguna.snapchat.di.india.ramai-ramai.hapus.aplikasi.apa.sebabnya."}'
 
 **Get all content**
 
