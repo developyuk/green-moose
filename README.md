@@ -12,7 +12,7 @@ Another look a like service:
 1. Install docker from https://docs.docker.com/engine/installation/
 2. Open docker terminal
 3. Change directory to `/path/to/folder/green-moose`
-4. Run `./docker-compose-build.sh`, wait until `Successfully built ..` message displayed
+4. Run `./docker-build.sh`, wait until `Successfully built ..` message displayed
 5. [Run project docker](#run-project-docker)
 
 ## Run project docker
@@ -25,7 +25,7 @@ Another look a like service:
 
 2. Open Terminal
 3. Change directory to `/path/to/folder/green-moose`
-4. Run `./docker-compose-up.sh`, wait until complete
+4. Run `./docker-up.sh`, wait until complete
 5. `CTRL+C` to exit logs
 
 
@@ -34,7 +34,7 @@ Open this address on browser. Replace `<docker.ip.address>` with your docker mac
 
 **Add content url to db**
 
-	curl -X POST -H "content-type:application/json" http://<docker.ip.address>:9060 -d '{"url":"http://tekno.kompas.com/read/2017/04/17/10400087/pengguna.snapchat.di.india.ramai-ramai.hapus.aplikasi.apa.sebabnya."}'
+	curl -X POST -H "content-type:application/json" http://<docker.ip.address>:9060 -d '{"url":"https://www.techinasia.com/tia-sg-2017-arena-swingvy"}'
 
 **Get all content**
 
@@ -49,4 +49,4 @@ Open this address on browser. Replace `<docker.ip.address>` with your docker mac
 ## Stop project docker
 1. Open Terminal
 2. Change directory to `/path/to/folder/green-moose`
-3. Run `./docker-compose-down.sh`, wait until all installation complete
+3. Run `./docker-down.sh`, wait until all installation complete

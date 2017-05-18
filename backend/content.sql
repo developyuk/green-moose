@@ -1,5 +1,5 @@
 --
--- File generated with SQLiteStudio v3.1.1 on Wed May 10 10:49:35 2017
+-- File generated with SQLiteStudio v3.1.1 on Kamis Mei 18 23:01:13 2017
 --
 -- Text encoding used: System
 --
@@ -28,8 +28,8 @@ CREATE TABLE source (
     id          INTEGER       PRIMARY KEY AUTOINCREMENT,
     url         VARCHAR (200) UNIQUE
                               NOT NULL,
-    dateFetched DATETIME      DEFAULT (datetime('now', 'localtime') ),
-    domain      VARCHAR (100) 
+    domain      VARCHAR (100),
+    parentId    INTEGER       REFERENCES source (id)
 );
 
 

@@ -10,10 +10,10 @@ server.connection({
   }
 });
 
-const {getAll: routeGetAll, post: routePost, get: routeGet} = require('./route-root.js');
-server.route({method: 'GET', path: '/', handler: routeGetAll});
-server.route({method: 'GET', path: '/{contentId}', handler: routeGet});
-server.route({method: 'POST', path: '/', handler: routePost});
+const {getAll: rootGetAll, post: rootPost, get: rootGet} = require('./routes-root.js');
+server.route({method: 'GET', path: '/', handler: rootGetAll});
+server.route({method: 'GET', path: '/{contentId}', handler: rootGet});
+server.route({method: 'POST', path: '/', handler: rootPost});
 
 server.register({
   register: Good,
@@ -23,12 +23,7 @@ server.register({
         {
           module: 'good-squeeze',
           name: 'Squeeze',
-          args: [
-            {
-              response: '*',
-              log: '*'
-            }
-          ]
+          args: [ { response: '*', log: '*' } ]
         }, {
           module: 'good-console'
         },
