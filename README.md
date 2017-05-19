@@ -34,16 +34,19 @@ Open this address on browser. Replace `<docker.ip.address>` with your docker mac
 
 **Add content url to db**
 
-	curl -X POST -H "content-type:application/json" http://<docker.ip.address>:9060 -d '{"url":"https://www.techinasia.com/tia-sg-2017-arena-swingvy"}'
+	$ curl -X POST -H "content-type:application/json" http://<docker.ip.address>:9060 -d '{"url":"https://www.techinasia.com/tia-sg-2017-arena-swingvy"}'
 
 **Get all content**
 
-	curl -H "content-type:application/json" http://<docker.ip.address>:9060
+	$ curl -H "content-type:application/json" http://<docker.ip.address>:9060
 
 **Get content detail**
 
-	curl -H "content-type:application/json" http://<docker.ip.address>:9060/1
+	$ curl -H "content-type:application/json" http://<docker.ip.address>:9060/1
 
+**Using micrometa**
+    $ ./docker-login.sh
+    # php getMicrodata.php https://www.techinasia.com/tia-sg-2017-arena-swingvy
 
 
 ## Stop project docker
