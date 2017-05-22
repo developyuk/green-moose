@@ -1,35 +1,30 @@
 version: '2'
 services:
-    backend:
+    parser:
         build:
-          context: ./backend
-          dockerfile: Dockerfile-arm
+            context: ./parser
+            dockerfile: Dockerfile-arm
         volumes:
-          - ./backend:/project/src:rw
+            - ./parser:/project/src:rw
         working_dir: /project
         ports:
-          - "9060:9000"
+            - "9060:80"
         expose:
-          - "9000"
+            - "80"
         restart: unless-stopped
-        command: node ./src/index.js
-    # frontenddev:
-    #     build:
-    #       context: ./frontend
-    #       dockerfile: Dockerfile-arm
-    #     volumes:
-    #       - ./frontend:/project/srcDir:rw
-    #     working_dir: /project
-    #     restart: unless-stopped
-    #     command: tail -f /dev/null
-    # frontend:
-    #     image: armhf/busybox
-    #     volumes:
-    #       - ./frontend/dist:/project
-    #     working_dir: /project
-    #     ports:
-    #       - "9065:80"
-    #     links:
-    #       - backend
-    #     restart: unless-stopped
-    #     command: /bin/busybox httpd -f -v -p 0.0.0.0:80 -h /project
+        command: apachectl -DFOREGROUND
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile-arm
+        volumes:
+            - ./backend:/project/src:rw
+        working_dir: /project
+        ports:
+            - "9065:9000"
+        expose:
+            - "9000"
+        links:
+            - parser
+        restart: unless-stopped
+        command: node src/index.js

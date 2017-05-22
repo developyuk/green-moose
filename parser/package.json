@@ -1,0 +1,22 @@
+{
+    "name": "green-moose",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/developyuk/green-moose.git"
+    },
+    "author": "developyuk",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/developyuk/green-moose/issues"
+    },
+    "homepage": "https://github.com/developyuk/green-moose#readme",
+    "dependencies": {
+        "underscore": "^1.8.3"
+    }
+}

@@ -1,43 +1,29 @@
 FROM debian:jessie-slim
 
 RUN set -ex \
-  && export DEBIAN_FRONTEND='noninteractive' \
-  && apt-get update && apt-get install -y --no-install-recommends --no-install-suggests \
-    ca-certificates \
-    curl \
+    && export DEBIAN_FRONTEND='noninteractive' \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends --no-install-suggests \
+        ca-certificates
 
-  && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
-  && apt-get install -y --no-install-recommends --no-install-suggests \
-    nodejs \
-    build-essential \
+RUN set -ex \
+    && apt-get install -y --no-install-recommends --no-install-suggests \
+        curl \
 
-    sqlite3 \
+    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && apt-get install -y --no-install-recommends --no-install-suggests \
+        nodejs \
+        build-essential
 
-    libfontconfig \
-    php5-cli \
-
-  && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-  && php -r "if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" \
-  && php composer-setup.php \
-  && php -r "unlink('composer-setup.php');" \
-
-  && mv composer.phar /usr/local/bin/composer \
-
-  && rm -rf /var/lib/apt/lists/* \
-
-  && apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y \
-  && rm -rf /var/cache/debconf/*-old /usr/share/doc/* /usr/share/man/* /usr/share/groff/* /usr/share/info/* /tmp/* /var/tmp/*
+RUN set -ex \
+    && apt-get install -y --no-install-recommends --no-install-suggests \
+        sqlite3
 
 COPY package.json /project/
-COPY composer.json /project/
-
-WORKDIR /project
-RUN set -ex \
-  && npm install \
-  && composer install
-
 COPY content.sql /tmp/content.sql
+
 WORKDIR /project
 RUN set -ex \
-  && sqlite3 content.db < /tmp/content.sql \
-  && rm -rf /tmp/*
+    && npm install \
+    && sqlite3 content.db < /tmp/content.sql \
+    && rm -rf /tmp/*

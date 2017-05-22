@@ -1,4 +1,4 @@
 *.db
 frontend/dist/
 node_modules/
-backend/*phantomjs*
+parser/*phantomjs*

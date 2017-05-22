@@ -28,8 +28,7 @@ CREATE TABLE source (
     id          INTEGER       PRIMARY KEY AUTOINCREMENT,
     url         VARCHAR (200) UNIQUE
                               NOT NULL,
-    domain      VARCHAR (100),
-    parentId    INTEGER       REFERENCES source (id)
+    domain      VARCHAR (100)
 );
 
 
