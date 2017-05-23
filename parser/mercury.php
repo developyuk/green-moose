@@ -3,8 +3,8 @@
 namespace Mercury;
 
 class Parser{
-    public $dest;
-    private $apiKey='API_KEY';
+    public $url;
+    public $apiKey='API_KEY';
     private $ch;
 
     public function __construct() {
@@ -12,7 +12,7 @@ class Parser{
     }
 
     private function getParserUrl(){
-        return 'https://mercury.postlight.com/parser?url='.$this->dest;
+        return 'https://mercury.postlight.com/parser?url='.$this->url;
     }
 
     static function getUserAgent(){

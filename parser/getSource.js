@@ -13,7 +13,7 @@ page.onResourceRequested = function(requestData, networkRequest) {
         // console.log('The url of the request is matching. Aborting: ' + requestData['url']);
         networkRequest.abort();
     }
-    // console.log(requestData.headers['Content-Type']);
+    // console.log(requestData['url']);
     requestsArray.push(requestData.id);
 };
 

@@ -7,7 +7,6 @@ Another look a like service:
 - flipboard
 
 ## TODO
-- phantomjs is expensive, try to remote running phantomjs with opened tab to reusing cache
 - parse related url from content
 - try using queued job / separate process to parse related url
 
@@ -26,7 +25,7 @@ Another look a like service:
 
 	1. Sign up at [mercury web parser](https://mercury.postlight.com/web-parser/)
 	2. Get `MERCURY WEB PARSER API KEY`
-	3. Replace `API_KEY` at [`parser/mercury.php` on line 7](../develop/parser/mercury.js#L7) with your own `MERCURY WEB PARSER API KEY`
+	3. Replace `API_KEY` at [`parser/index.php` on line 9](../develop/parser/index.php#L9) with your own `MERCURY WEB PARSER API KEY`
 
 2. Open Terminal
 3. Change directory to `/path/to/folder/green-moose`

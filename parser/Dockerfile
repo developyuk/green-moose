@@ -28,7 +28,7 @@ RUN set -ex \
 COPY phantomjs /project/
 
 RUN set -ex \
-  && chmod 755 ./phantomjs \
+    && chmod 755 ./phantomjs \
 
 	&& cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/010-micrometa.conf \
 	&& sed -i 's/DocumentRoot .*/DocumentRoot \/project\/src/' /etc/apache2/sites-available/010-micrometa.conf \
@@ -44,3 +44,7 @@ RUN set -ex \
 	&& a2ensite 010-micrometa \
 
 	&& a2enmod rewrite
+
+ADD https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts /project/
+RUN set -ex \
+    && cat /project/hosts >> /etc/hosts
